@@ -1,3 +1,3 @@
-corpera
+corpora
 taggers
 tokenizers
