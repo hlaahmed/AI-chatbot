@@ -1,14 +1,8 @@
 ! version= 2.0
-> begin
-+ request
-* <get met> == undefined => <set met=true>{topic=welcome}{ok}
-- {ok}
-< begin
 
->  topic welcome
 + *
 - Hi Do you want to make a call? {topic=attend}
-< topic
+
 
 > topic attend
 + yes
