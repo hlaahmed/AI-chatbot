@@ -1,0 +1,30 @@
+! version= 2.0
+> begin
++ request
+* <get met> == undefined => <set met=true>{topic=welcome}{ok}
+- {ok}
+< begin
+
+>  topic welcome
++ *
+- Hi Do you want to make a call? {topic=attend}
+< topic
+
+> topic attend
++ yes
+- Okay let me know the number that you want to contact {topic=username}
++ no
+- No problem can you go out
+< topic
+
+> topic username
++ *
+- the number is busy do you want to leave a message?{topic=vn}
+< topic
+
+> topic vn
++ yes
+- recording a vn is currently under development
++ no
+- No problem you can go out
+< topic
