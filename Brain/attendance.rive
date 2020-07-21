@@ -23,5 +23,5 @@
 < topic
 > topic end
 + *
-- do you want to enter a new number?{attend}
+- do you want to enter a new number?{topic=attend}
 < topic
