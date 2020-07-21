@@ -10,7 +10,6 @@
 + no
 - No problem can you go out
 < topic
-
 > topic username
 + *
 - the number is busy do you want to leave a message?{topic=vn}
@@ -18,7 +17,11 @@
 
 > topic vn
 + yes
-- recording a vn is currently under development
+- recording a vn is currently under development{topic=end}
 + no
-- No problem you can go out
+- No problem you can go out{topic=end}
+< topic
+> topic end
++ *
+- do you want to enter a new number?{attend}
 < topic
