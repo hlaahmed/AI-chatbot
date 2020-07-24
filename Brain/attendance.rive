@@ -1,27 +1,36 @@
 ! version= 2.0
+> begin
++ request
+* <get met> == undefined => <set met=true>{topic=welcome}{ok}
+- {ok}
+< begin
 
+>  topic welcome
 + *
-- Hi Do you want to make a call? {topic=attend}
-
-
-> topic attend
-+ yes
-- Okay let me know the number that you want to contact {topic=username}
-+ no
-- No problem can you go out
-< topic
-> topic username
-+ *
-- the number is busy do you want to leave a message?{topic=vn}
+- Hi, please enter your phone number {topic=checkdata}
 < topic
 
-> topic vn
-+ yes
-- recording a vn is currently under development{topic=end}
-+ no
-- No problem you can go out{topic=end}
-< topic
-> topic end
+> topic checkdata
++ 011#
+- your etisalate phone number is already stored{topic=etisalate}
++ 012#
+- your orange phone number is already stored{topic=orange}
++ 010#
+- your vodafone phone number is already stored{topic=vodafone}
 + *
-- do you want to enter a new number?{topic=attend}
+- that is an invalid phone number
+< topic
+
+> topic etisalate
++ *
+- etisalate offers
+< topic
+
+> topic orange
++ *
+- orange offers
+< topic
+> topic vodafone
++ *
+- vodafone offers
 < topic
