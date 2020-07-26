@@ -1,0 +1,152 @@
+! version= 2.0
+! local concat = newline
+> begin
++ request
+* <get met> == undefined => <set met=true>{topic=welcome}{ok}
+- {ok}
+< begin
+
+>  topic welcome
++ *
+- please enter your phone number {topic=checkdata}
+< topic
+
+> topic checkdata
++ 011#
+- <set phone=<star>>you will be directed to etisalate menu press any key to continue{topic=etisalate}
++ 012#
+- <set phone=<star>>you will be directed to orange menu press any key to continue{topic=orange}
++ 010#
+- <set phone=<star>>you will be directed to vodafone menu press any key to continue{topic=vodafone}
++ *
+- a valid phone number must start with 010 or 011 or 012
+< topic
+
+> topic etisalate
++ *
+- <call>getPhoneE <get phone></call>
+< topic
+
+> topic orange
++ *
+- <call>getPhoneO <get phone></call>
+< topic
+> topic vodafone
++ *
+- <call>getPhoneV <get phone></call>
+< topic
+
+> topic newetisalate
++ #
+- <set company=etisalate>welcome to etisalate please enter the name that you want to register your number with{topic=ename}
++ _
+- press any number
+< topic
+
+>topic ename
++ _
+- <set name=<star>> select one of the internet services provided by etisalate by entering the number of the service :
+ ^ 1. super connect
+ ^ 2. emerald {topic=eservice}
++ #
+- that does not look like a name to me
+< topic
+
+> topic neworange
++ #
+- <set company=orange>welcome to orange please enter the name that you want to register your number with{topic=oname}
++ _
+- press any number
+< topic
+
+>topic oname
++ _
+- <set name=<star>> select one of the internet services provided by orange by entering the number of the service :
+^ 1. dragon
+^ 2. go {topic=oservice}
++ #
+- that does not look like a name to me
+< topic
+
+> topic newvodafone
++ #
+- <set company=vodafone>welcome to vodafone please enter the name that you want to register your number with{topic=vname}
++ _
+- press any number
+< topic
+
+> topic vname
++ _
+- <set name=<star>> select one of the internet services provided by vodafone by entering the number of the service :
+^ 1. flex
+^ 2. internet bundle {topic=vservice}
++ #
+- that does not look like a name to me
+< topic
+
+> topic eservice
++ 1
+- <set service=superconnect>your internet service is super connect{topic=save}
++ 2
+- <set service=emerald>your internet service is emerald{topic=save}
++ *
+- i can not understand your choice
+< topic
+
+> topic oservice
++ 1
+- <set service=dragon>your internet service is dragon{topic=save}
++ 2
+- <set service=go>your internet service is go{topic=save}
++ *
+- i can not understand your choice
+< topic
+
+> topic vservice
++ 1
+- <set service=flex>your internet service is flex{topic=save}
++ 2
+- <set service=internetbundle>your internet service is internet bundle{topic=save}
++ *
+- i can not understand your choice
+< topic
+
+>topic save
++ *
+- <call>save <get name> <get phone> <get company> <get service></call>{topic=welcome}
+<topic
+> object getPhoneE python
+  import utilis
+  phone = str("11") + str(args[0])
+  Phone = utilis.getPhone(phone)
+  if Phone:
+    return "data is already stored for this phone"
+  else:
+    return "this phone number does not have any previous data press any number to continue{topic=newetisalate}"
+< object
+
+> object getPhoneO python
+  import utilis
+  phone = str("12") + str(args[0])
+  Phone = utilis.getPhone(phone)
+  if Phone:
+    return "data is already stored for this phone"
+  else:
+    return "this phone number does not have any previous data press any number to continue{topic=neworange}"
+< object
+
+> object getPhoneV python
+  import utilis
+  phone = str("10") + str(args[0])
+  Phone = utilis.getPhone(phone)
+  if Phone:
+    return "data is already stored for this phone"
+  else:
+    return "this phone number does not have any previous data press any number to continue{topic=newvodafone}"
+< object
+
+> object save python
+  import utilis
+  utilis.save(str(args[0]),str(args[1]),str(args[2]),str(args[3]))
+  return "your data is saved"
+< object
