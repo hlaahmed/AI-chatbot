@@ -50,7 +50,8 @@ def chat():
             audio = r.listen(source)
             voice_data = r.recognize_google(audio)
             response = Bot.chat(voice_data)
-            return str(response)
+            res = str(response) + '\n' + "press enter to start recording your response"
+            return str(res)
     if (not (rec)):
         request_data = request.args.get('msg')
         response = Bot.chat(request_data)
@@ -59,4 +60,5 @@ def chat():
 
 if __name__ == "__main__":
     app.run()
+
 
