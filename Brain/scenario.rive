@@ -13,11 +13,11 @@
 
 > topic checkdata
 + 011#
-- <set phone=<star>>you will be directed to etisalate menu press any key to continue{topic=etisalate}
+- <set phone=<star>>you will be directed to etisalate menu enter any key to continue{topic=etisalate}
 + 012#
-- <set phone=<star>>you will be directed to orange menu press any key to continue{topic=orange}
+- <set phone=<star>>you will be directed to orange menu enter any key to continue{topic=orange}
 + 010#
-- <set phone=<star>>you will be directed to vodafone menu press any key to continue{topic=vodafone}
+- <set phone=<star>>you will be directed to vodafone menu enter any key to continue{topic=vodafone}
 + *
 - a valid phone number must start with 010 or 011 or 012
 < topic
@@ -40,7 +40,7 @@
 + #
 - <set company=etisalate>welcome to etisalate please enter the name that you want to register your number with{topic=ename}
 + _
-- press any number
+- enter any number
 < topic
 
 >topic ename
@@ -56,7 +56,7 @@
 + #
 - <set company=orange>welcome to orange please enter the name that you want to register your number with{topic=oname}
 + _
-- press any number
+- enter any number
 < topic
 
 >topic oname
@@ -72,7 +72,7 @@
 + #
 - <set company=vodafone>welcome to vodafone please enter the name that you want to register your number with{topic=vname}
 + _
-- press any number
+- enter any number
 < topic
 
 > topic vname
@@ -86,27 +86,27 @@
 
 > topic eservice
 + 1
-- <set service=superconnect>your internet service is super connect{topic=save}
+- <set service=superconnect>your internet service is super connect enter any key to confirm{topic=save}
 + 2
-- <set service=emerald>your internet service is emerald{topic=save}
+- <set service=emerald>your internet service is emerald enter any key to confirm{topic=save}
 + *
 - i can not understand your choice
 < topic
 
 > topic oservice
 + 1
-- <set service=dragon>your internet service is dragon{topic=save}
+- <set service=dragon>your internet service is dragon enter any key to confirm{topic=save}
 + 2
-- <set service=go>your internet service is go{topic=save}
+- <set service=go>your internet service is go enter any key to confirm{topic=save}
 + *
 - i can not understand your choice
 < topic
 
 > topic vservice
 + 1
-- <set service=flex>your internet service is flex{topic=save}
+- <set service=flex>your internet service is flex enter any key to confirm{topic=save}
 + 2
-- <set service=internetbundle>your internet service is internet bundle{topic=save}
+- <set service=internetbundle>your internet service is internet bundle enter any key to confirm{topic=save}
 + *
 - i can not understand your choice
 < topic
