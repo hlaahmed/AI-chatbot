@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
- <title>Python-Bot</title>
+ <title>Call-Center-Bot</title>
  <meta name="viewport" content="width=device-width, initial-scale=1">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
  <style>
@@ -80,16 +80,34 @@
  <div>
  <div id="chatbox">
  <p class="botText">
- <span>Hi! I'm 404-BOT your personal ChatBot</span>
+ <span>Hi! I'm 404-BOT, if you want to interact with me only by voice, type the word record then start talking</span>
  </p>
  </div>
  <div id="userInput">
- <input id="textInput" type="text" name="msg" placeholder="Message" />
+ <input id="textInput" type="text"  name="msg" placeholder="Message" />
  </div>
+
+    <button id='btnGiveCommand'>Speak!</button>
  </div>
  <script>
- function getBotResponse() {
- var rawText = $("#textInput").val();
+        var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition;
+
+        var recognition = new SpeechRecognition();
+        recognition.lang = 'en-US';
+        recognition.interimResults = false;
+        document.getElementById("btnGiveCommand").onclick = function()
+        {
+         recognition.start();
+        }
+        recognition.onresult = function(event) {
+                 var last = event.results.length - 1;
+                 var command = event.results[last][0].transcript;
+                 getBotResponse(command);
+                }
+ </script>
+ <script>
+ function getBotResponse(rawText) {
+ var rawText = rawText;
  var userHtml = '<p class="userText"><span>' + rawText + "</span></p>";
  $("#textInput").val("");
  $("#chatbox").append(userHtml);
@@ -106,11 +124,11 @@
  }
  $("#textInput").keypress(function (e) {
  if (e.which == 13) {
- getBotResponse();
+ getBotResponse($("#textInput").val());
  }
  });
  </script>
  </div>
- </div>
+</div>
 </body>
 </html>
