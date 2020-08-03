@@ -5,7 +5,7 @@ import Bot
 
 
 app = Flask(__name__)
-ENV = 'dev'
+ENV = 'prod'
 if ENV == 'dev':
     app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:1234@localhost/user-responses'
 else:
