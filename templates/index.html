@@ -68,7 +68,7 @@
  margin-right: auto;
  width: 78%;
  margin-top: 60px;
- border: 1px solid black;
+ border: 1px solid green;
  }
  </style>
 </head>
@@ -80,7 +80,7 @@
  <div>
  <div id="chatbox">
  <p class="botText">
- <span>Hi! I'm 404-BOT, you can send me text message or if you are lazy ;) you can click on speak button and record your answers</span>
+ <span>Hi! I'm 404-BOT, if you want to interact with me only by voice, type the word record then start talking</span>
  </p>
  </div>
  <div id="userInput">
@@ -89,6 +89,7 @@
 
     <button id='btnGiveCommand'>Speak!</button>
  </div>
+  <! -- a script for speech recognition, it calls get bot response script-->
  <script>
         var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition;
 
@@ -105,6 +106,17 @@
                  getBotResponse(command);
                 }
  </script>
+  <! -- script for speech synthesis -->
+  <script>
+   function talkback(data) {
+   var synth = window.speechSynthesis;
+   voices = synth.getVoices[1];
+   var utterThis = new SpeechSynthesisUtterance(data);
+   utterThis.voice=voices;
+   synth.speak(utterThis);
+   }
+  </script>
+  <! -- script for talking user text msgs printing them, getting bot reply and printing them, it call speech synthesis script -->
  <script>
  function getBotResponse(rawText) {
  var rawText = rawText;
@@ -116,11 +128,13 @@
  .scrollIntoView({ block: "start", behavior: "smooth" });
  $.get("/get", { msg: rawText }).done(function (data) {
  var botHtml = '<p class="botText"><span>' + data + "</span></p>";
+ talkback(data);
  $("#chatbox").append(botHtml);
  document
  .getElementById("userInput")
  .scrollIntoView({ block: "start", behavior: "smooth" });
  });
+
  }
  $("#textInput").keypress(function (e) {
  if (e.which == 13) {
