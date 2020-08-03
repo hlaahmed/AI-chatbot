@@ -5,7 +5,7 @@ import Bot
 
 
 app = Flask(__name__)
-ENV = 'prod'
+ENV = 'dev'
 if ENV == 'dev':
     app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:1234@localhost/user-responses'
 else:
@@ -29,30 +29,12 @@ class Users(db.Model):
         self.phone_company = phone_company
         self.internet_service = internet_service
 
-rec = False
-i = 0
+
 @app.route("/")
 def index():
     return render_template("index.html")
 @app.route("/get")
 def chat():
-    global i
-    global rec
-    if (i == 0):
-        i = i + 1
-        request_data = request.args.get('msg')
-        if (request_data == "record"):
-             rec = True
-
-    if (rec):
-        r = sr.Recognizer()
-        with sr.Microphone() as source:  # microphone as source
-            audio = r.listen(source)
-            voice_data = r.recognize_google(audio)
-            response = Bot.chat(voice_data)
-            res = str(response) + '\n' + "press enter to start recording your response"
-            return str(res)
-    if (not (rec)):
         request_data = request.args.get('msg')
         response = Bot.chat(request_data)
         return str(response)
@@ -60,5 +42,4 @@ def chat():
 
 if __name__ == "__main__":
     app.run()
-
 
