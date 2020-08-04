@@ -80,20 +80,25 @@
  <div>
  <div id="chatbox">
  <p class="botText">
- <span>Hi! I'm 404-BOT, you can send me text messages, and if you are lazy ;) you can record your answers by clicking on speak button on the bottom left</span>
+ <span>Hi! I'm 404-BOT, you can text me, and if you are lazy ;) you can record your answers by clicking on speak button on bottom left</span>
  </p>
  </div>
  <div id="userInput">
  <input id="textInput" type="text"  name="msg" placeholder="Message" />
  </div>
-
-    <button id='btnGiveCommand'>Speak!</button>
+ </div>
+   <button id='btnGiveCommand'>Speak!</button>
+   <button id='play'>record voice mail</button>
+   <button id="record">listen to voice mail</button>
+  </div>
  </div>
   <! -- a script for speech recognition, it calls get bot response script-->
  <script>
         var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition;
-
         var recognition = new SpeechRecognition();
+        var mail = new SpeechRecognition();
+        mail.lang= 'en-US';
+        mail.interimResults = false;
         recognition.lang = 'en-US';
         recognition.interimResults = false;
         document.getElementById("btnGiveCommand").onclick = function()
@@ -105,7 +110,28 @@
                  var command = event.results[last][0].transcript;
                  getBotResponse(command);
                 }
+                document.getElementById("play").onclick= function()
+                {
+                 mail.start();
+                }
+                mail.onresult = function(event) {
+                  var last = event.results.length - 1;
+                  vm = event.results[last][0].transcript;
+                }
+                document.getElementById("record").onclick = function()
+                {
+                    var synth = window.speechSynthesis;
+                    voice = synth.getVoices[0];
+                    var utterThis = new SpeechSynthesisUtterance(vm);
+                    utterThis.voice=voice;
+                    synth.speak(utterThis);
+                    file = vm+".mp3";
+                    file.save();
+
+                }
+
  </script>
+
   <! -- script for speech synthesis -->
   <script>
    function talkback(data) {
@@ -146,3 +172,4 @@
 </div>
 </body>
 </html>
+
