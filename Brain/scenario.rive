@@ -120,7 +120,7 @@
   phone = str("11") + str(args[0])
   Phone = utilis.getPhone(phone)
   if Phone:
-    return "data is already stored for this phone"
+    return "data is already stored for this phone,if you want to say anything more you can record a voice mail"
   else:
     return "this phone number does not have any previous data press any number to continue{topic=newetisalate}"
 < object
@@ -130,7 +130,7 @@
   phone = str("12") + str(args[0])
   Phone = utilis.getPhone(phone)
   if Phone:
-    return "data is already stored for this phone"
+    return "data is already stored for this phone,if you want to say anything more you can record a voice mail"
   else:
     return "this phone number does not have any previous data press any number to continue{topic=neworange}"
 < object
@@ -140,7 +140,7 @@
   phone = str("10") + str(args[0])
   Phone = utilis.getPhone(phone)
   if Phone:
-    return "data is already stored for this phone"
+    return "data is already stored for this phone, if you want to say anything more you can record a voice mail"
   else:
     return "this phone number does not have any previous data press any number to continue{topic=newvodafone}"
 < object
@@ -148,5 +148,5 @@
 > object save python
   import utilis
   utilis.save(str(args[0]),str(args[1]),str(args[2]),str(args[3]))
-  return "your data is saved"
+  return "your data is saved, if you want to say anything more you can record a voice mail"
 < object
