@@ -169,54 +169,6 @@
  });
  </script>
  </div>
- 
-<a id="download">Download</a>
-<button id="stop">Stop</button>
- <button id='play1'>record voice mail</button>
-<script>
-let shouldStop = false;
-let stopped = false;
-const stopButton = document.getElementById('stop');
-  const downloadLink = document.getElementById('download');
-  stopButton.addEventListener('click', function() {
-    shouldStop = true;
-  });
-
-  const handleSuccess = function(stream) {
-    const options = {mimeType: 'audio/webm'};
-    const recordedChunks = [];
-    const mediaRecorder = new MediaRecorder(stream, options);
-
-    mediaRecorder.addEventListener('dataavailable', function(e) {
-      if (e.data.size > 0) {
-        recordedChunks.push(e.data);
-      }
-
-      if(shouldStop === true && stopped === false) {
-       stream.getTracks().forEach(function(track) {
-        if (track.readyState == 'live' && track.kind === 'audio') {
-            track.stop();
-        }
-        });
-        mediaRecorder.stop();
-        stopped = true;
-      }
-    });
-
-    mediaRecorder.addEventListener('stop', function() {
-      downloadLink.href = URL.createObjectURL(new Blob(recordedChunks));
-      downloadLink.download = 'audio.wav';
-    });
-     mediaRecorder.start();
-  };
-document.getElementById("play1").onclick=function() {
- navigator.mediaDevices.getUserMedia({audio: true, video: false})
-         .then(handleSuccess);
-}
-</script>
-<audio controls>
-  <source src=downloadLink.href type="audio/wav">
-</audio>
 </div>
 </body>
 </html>
