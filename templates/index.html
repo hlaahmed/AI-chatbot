@@ -205,11 +205,7 @@ const stopButton = document.getElementById('stop');
 
     mediaRecorder.addEventListener('stop', function() {
       downloadLink.href = URL.createObjectURL(new Blob(recordedChunks));
-      downloadLink.download = 'acetest.wav';
-      const audioBlob = new Blob(recordedChunks);
-      const audioUrl = URL.createObjectURL(audioBlob);
-      const audio = new Audio(audioUrl);
-      audio.play();
+      downloadLink.download = 'audio.wav';
     });
      mediaRecorder.start();
   };
@@ -218,6 +214,9 @@ document.getElementById("play1").onclick=function() {
          .then(handleSuccess);
 }
 </script>
+<audio controls>
+  <source src=downloadLink.href type="audio/wav">
+</audio>
 </div>
 </body>
 </html>
