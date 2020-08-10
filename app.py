@@ -8,7 +8,7 @@ if ENV == 'dev':
     app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:1234@localhost/user-responses'
 else:
     app.config[
-        'SQLALCHEMY_DATABASE_URI'] = 'postgres://kcnrkscjpofvmw:27fa3f56086364422e130fbfca88ad36e551bc76bf1b1fcb6326428a0bf2e905@ec2-52-202-66-191.compute-1.amazonaws.com:5432/d12frn1u7p3tna'
+        'SQLALCHEMY_DATABASE_URI'] = ' postgres://kcnrkscjpofvmw:27fa3f56086364422e130fbfca88ad36e551bc76bf1b1fcb6326428a0bf2e905@ec2-52-202-66-191.compute-1.amazonaws.com:5432/d12frn1u7p3tna'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
