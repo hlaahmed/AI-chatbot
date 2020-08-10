@@ -45,7 +45,7 @@ def chat():
                     return response
         else:
             flag = False
-            response = "Bye! take care, and if you want to say anything more you can leave a voice mail"
+            response = "Bye! take care, and if you want to say anything more you can leave a voice note"
             return response
 
 if __name__ == "__main__":
