@@ -27,7 +27,7 @@ def chat():
     flag = True
     while (flag == True):
         user_response = request.args.get('msg')
-        utilis.save(user_response)
+       
         user_response = user_response.lower()
         if (user_response != 'bye'):
             if (user_response == 'thanks' or user_response == 'thank you'):
