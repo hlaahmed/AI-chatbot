@@ -1,7 +1,7 @@
 from flask import Flask, request, render_template
 from flask_sqlalchemy import SQLAlchemy
 import Bot
-
+import utilis
 app = Flask(__name__)
 ENV = 'dev'
 if ENV == 'dev':
@@ -12,22 +12,13 @@ else:
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
-
 class Users(db.Model):
     __tablename__ = 'Users'
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(200))
-    phone = db.Column(db.VARCHAR(200), unique=True)
-    phone_company = db.Column(db.String(200))
-    internet_service = db.Column(db.String(200))
+    response = db.Column(db.String(200), unique=True)
 
-    def __init__(self, name, phone, phone_company, internet_service):
-        self.name = name
-        self.phone = phone
-        self.phone_company = phone_company
-        self.internet_service = internet_service
-
-
+    def __init__(self, response):
+        self.response = response
 @app.route("/")
 def index():
     return render_template("index.html")
@@ -36,6 +27,7 @@ def chat():
     flag = True
     while (flag == True):
         user_response = request.args.get('msg')
+        utilis.save(user_response)
         user_response = user_response.lower()
         if (user_response != 'bye'):
             if (user_response == 'thanks' or user_response == 'thank you'):
@@ -55,7 +47,6 @@ def chat():
             flag = False
             response = "Bye! take care, and if you want to say anything more you can leave a voice mail"
             return response
-
 
 if __name__ == "__main__":
     app.run()
